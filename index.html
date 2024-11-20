@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liga de Filósofos</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <h1>Liga de Filósofos</h1>
+    </header>
+
+    <aside class="sidebar">
+        <h2>Opciones</h2>
+        <button type="submit" class="save-btn">Guardar Tarjetas</button>
+        <button type="submit" class="load-btn">Cargar Tarjetas</button>
+        <div class="sort-options">
+          <h3>Ordenar por:</h3>
+          <button class="sort-btn">A->Z</button>
+          <button class="sort-btn">Z->A</button>
+        </div>
+        
+        <!-- Formulario para crear una nueva tarjeta -->
+        <div class="create-card-form">
+          <h3>Crear Nueva Tarjeta</h3>
+          <form>
+            <label for="name">Nombre</label>
+            <input type="text" id="name" class="nombre" required>
+
+            <label for="name">Imagen (URL)</label>
+            <input type="text" id="name" class="foto" required>
+      
+            <label for="country">País</label>
+            <input type="text" id="country" class="pais" required>
+
+            <label for="country">Bandera (URL)</label>
+            <input type="text" id="country" class="bandera" required>
+      
+            <label for="philosophy">Corriente Filosófica</label>
+            <input type="text" id="philosophy" class="corriente" required>
+      
+            <label for="weapon">Arma Principal</label>
+            <input type="text" id="weapon" class="arma" required>
+      
+            <label for="skills">Habilidades (0-4)</label>
+            <input type="number" id="skills" class="skills" min="1" max="10" required>
+
+            <label for="skills">Habilidades (0-4)</label>
+            <input type="number" id="skills" class="skills" min="1" max="10" required>
+
+            <label for="skills">Habilidades (0-4)</label>
+            <input type="number" id="skills" class="skills" min="1" max="10" required>
+
+            <label for="skills">Habilidades (0-4)</label>
+            <input type="number" id="skills" class="skills" min="1" max="10" required>
+      
+            <button class="create-btn">Crear Tarjeta</button>
+          </form>
+        </div>
+      </aside>
+      
+
+    <main>
+        <section class="cards-container">
+            <!-- Card Sample -->
+                <!-- <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Plato_Pio-Clemetino_Inv305.jpg/1200px-Plato_Pio-Clemetino_Inv305.jpg" alt="Foto de Filósofo" class="photo">
+                    <div class="card-info">
+                    <h3 class="nombre">Platón</h3>
+                    <div class="info-row">
+                        <div class="info-pais">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Greece.svg/640px-Flag_of_Greece.svg.png" alt="Bandera de Grecia">
+                            <span class="pais"> Grecia</span>
+                        </div>
+                        <div class="info-corriente">
+                            <span>Corriente: </span><span class="corriente">Idealismo</span>
+                        </div>
+                        <div class="info-arma">
+                            <span>Arma: </span><span class="arma">Dialéctica</span>
+                        </div>
+                    </div>
+                    <div class="skills">
+                        <div class="skill">
+                            <img src="https://via.placeholder.com/16" alt="Icono de sabiduría">
+                            <span class="skill-name">Sabiduría</span>
+                            <div class="skill-bar">
+                                <div class="level" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <img src="https://via.placeholder.com/16" alt="Icono de oratoria">
+                            <span class="skill-name">Oratoria</span>
+                            <div class="skill-bar">
+                                <div class="level" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <img src="https://via.placeholder.com/16" alt="Icono de lógica">
+                            <span class="skill-name">Lógica</span>
+                            <div class="skill-bar">
+                                <div class="level" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <img src="https://via.placeholder.com/16" alt="Icono de innovación">
+                            <span class="skill-name">Innovación</span>
+                            <div class="skill-bar">
+                                <div class="level" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- Repite el formato de tarjetas para agregar más filósofos -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Clasificador de Filósofos</p>
+    </footer>
+
+    <script src="./script.js"></script>
+</body> 
+</html>

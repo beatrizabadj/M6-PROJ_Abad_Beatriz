@@ -1,0 +1,313 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1b1b32;
+    color: #e6e6e6;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header header header"
+        "main main aside"
+        "footer footer footer";
+    min-height: 100vh;
+    gap: 1rem;
+}
+
+header {
+    grid-area: header;
+    background-color: #232346;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+aside {
+    grid-area: aside;
+    background-color: #2d2d4a;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+main {
+    grid-area: main;
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+footer {
+    grid-area: footer;
+    background-color: #232346;
+    text-align: center;
+    padding: 1rem;
+    color: #cccccc;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.card {
+    background-color: #333354;
+    width: 330px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.photo {
+    width: 100%;
+    /* height: auto; */
+    height: 60%;
+    object-fit: cover;
+    border-bottom: 4px solid #1b1b32;
+}
+
+.card-info {
+    padding: 1rem;
+}
+
+.card-info h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    color: #00baff;
+}
+
+.info-row {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    row-gap: 0.5rem;
+}
+
+.info-row span {
+    margin-bottom: 6px;
+}
+
+.info-row img {
+    width: 18px;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.skills {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.skill img {
+    width: 16px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.skill-bar {
+    background-color: #444;
+    height: 8px;
+    width: 60%;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-left: 4px;
+}
+
+.level {
+    background-color: #00aaff;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.botonEliminar{
+    position: absolute;
+    color: black;
+    font-size: 30px;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+.botonEliminar:hover{
+    color: red;
+    cursor: pointer;
+}
+
+
+/* Estilos generales para el aside */
+.sidebar {
+    background-color: #2e3a4f;
+    /* Color oscuro */
+    color: #f3f4f6;
+    /* Color claro para texto */
+    padding: 20px;
+    width: 250px;
+    border-radius: 8px;
+}
+
+/* Título del aside */
+.sidebar h2 {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    color: #f9b233;
+    /* Un color destacado */
+    text-align: center;
+    border-bottom: 2px solid #f3f4f6;
+    padding-bottom: 10px;
+}
+
+/* Estilos para secciones */
+.sidebar .filters,
+.sidebar .sort-options {
+    margin-bottom: 20px;
+}
+
+/* Subtítulos de secciones */
+.sidebar .sort-options h3 {
+    font-size: 1.2em;
+    color: #f3f4f6;
+    margin-bottom: 10px;
+}
+
+/* Botones de filtro */
+.filter-btn,
+.sort-btn {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    background-color: #40567c;
+    color: #f3f4f6;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.sort-btn:hover {
+    background-color: #5778a4;
+    transform: translateY(-2px);
+}
+
+/* Efecto de sombra */
+.sidebar {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para la sección de creación de tarjeta */
+.create-card-form {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #f3f4f6;
+}
+
+.create-card-form h3 {
+    font-size: 1.4em;
+    color: #f9b233;
+    margin-bottom: 10px;
+}
+
+/* Estilos para los elementos del formulario */
+.create-card-form label {
+    display: block;
+    font-size: 0.9em;
+    color: #f3f4f6;
+    margin-top: 10px;
+}
+
+.create-card-form input[type="text"],
+.create-card-form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    background-color: #40567c;
+    border: 1px solid #2e3a4f;
+    border-radius: 4px;
+    color: #f3f4f6;
+    font-size: 1em;
+}
+
+/* Botón para crear la tarjeta */
+.create-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    background-color: #f9b233;
+    color: #2e3a4f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.create-btn:hover {
+    background-color: #e6a028;
+    transform: translateY(-2px);
+}
+
+/* Botón para guardar tarjetas */
+.save-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    background-color: green;
+    color: #2e3a4f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+    background-color: green;
+    transform: translateY(-2px);
+}
+
+/* Botón para cargar tarjetas */
+.load-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    background-color: blue;
+    color: #2e3a4f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1em;
+}
+
+.load-btn:hover {
+    background-color: blue;
+    transform: translateY(-2px);
+}
