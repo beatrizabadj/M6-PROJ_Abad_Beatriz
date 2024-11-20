@@ -5,6 +5,8 @@ window.onload = () => {
     // Crear handlers para los botones de control
     let botonCrearTarjeta = document.querySelector('.create-btn');
     botonCrearTarjeta.addEventListener('click',crearNuevaTarjeta);
+    // let botonEliminarTarjeta = document.querySelector('.delete-btn');
+    // botonEliminarTarjeta.addEventListener('click', eliminarTarjeta);
 }
 
 function crearTarjetas(filosofos) {
@@ -98,10 +100,18 @@ function crearTarjetas(filosofos) {
         // Añadimos tarjeta creada al contenedor de tarjetas
         let contenedor = document.querySelector('.cards-container');
         contenedor.append(tarjeta);
+
+        //Botón de eliminación
+        let botonEliminarTarjeta = document.createElement('div');
+        botonEliminarTarjeta.innerHTML = '&#x2716';
+        botonEliminarTarjeta.classList.add('botonEliminar');
+        botonEliminarTarjeta.addEventListener('click', eliminarTarjeta); //eliminamos el elemento padre
+        tarjeta.append(botonEliminarTarjeta);
     })
 }
 
-function eliminarTarjeta() {
+function eliminarTarjeta(event) {
+    event.target.parentElement.remove();
 }
 
 function ordenarNombreAZ() {
