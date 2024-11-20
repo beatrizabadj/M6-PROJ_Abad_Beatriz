@@ -196,7 +196,7 @@ footer {
 
 /* Botones de filtro */
 .filter-btn,
-.sort-btn {
+.sort-az, .sort-za {
     display: block;
     width: 100%;
     padding: 10px 15px;
@@ -211,7 +211,7 @@ footer {
 }
 
 .filter-btn:hover,
-.sort-btn:hover {
+.sort-az:hover, .sort-za:hover {
     background-color: #5778a4;
     transform: translateY(-2px);
 }

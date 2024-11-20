@@ -5,8 +5,14 @@ window.onload = () => {
     // Crear handlers para los botones de control
     let botonCrearTarjeta = document.querySelector('.create-btn');
     botonCrearTarjeta.addEventListener('click',crearNuevaTarjeta);
-    // let botonEliminarTarjeta = document.querySelector('.delete-btn');
-    // botonEliminarTarjeta.addEventListener('click', eliminarTarjeta);
+
+    let botonOrdenarAZ = document.querySelector('.sort-az');
+    botonOrdenarAZ.addEventListener('click', ordenarNombreAZ);
+    // ordenarNombreAZ()
+
+    let botonOrdenarZA = document.querySelector('.sort-za');
+    botonOrdenarZA.addEventListener('click', ordenarNombreZA);
+    // ordenarNombreZA()
 }
 
 function crearTarjetas(filosofos) {
@@ -115,22 +121,38 @@ function eliminarTarjeta(event) {
 }
 
 function ordenarNombreAZ() {
-    let tarjetas = Array.from(document.querySelectorAll('.card'));
+    let tarjetas = Array.from(document.querySelectorAll('.card')); 
     let tarjetasOrdenadas = tarjetas.sort((tarjetaA, tarjetaB) => {
         let nombre1 = tarjetaA.querySelector('h3').innerHTML;
         let nombre2 = tarjetaB.querySelector('h3').innerHTML;
-        return nombre1.localeCompare(nombre2);
+        return nombre1.localeCompare(nombre2); //devuelve - si nombre1 es menor, 0 si es igual
     });
 
     // Eliminar totes les targetes de l'array 'tarjeta'
     // Completar codi
-
-    // Afegir 'tarjetasOrdenadas' al contenidor de cards
     let contenedor = document.querySelector('.cards-container');
+    contenedor.innerHTML = ''; //eliminamos las tarjetas del DOM
+  // Afegir 'tarjetasOrdenadas' al contenidor de cards
+    tarjetasOrdenadas.forEach(tarjeta => {
+        contenedor.appendChild(tarjeta);
+    });
     // Completar codi
 }
 
 function ordenarNombreZA() {
+    let tarjetas = Array.from(document.querySelectorAll('.card'));
+    let tarjetasOrdenadas = tarjetas.sort((tarjetaA, tarjetaB) => {
+        let nombre1 = tarjetaA.querySelector('h3').innerHTML;
+        let nombre2 = tarjetaB.querySelector('h3').innerHTML;
+        return nombre2.localeCompare(nombre1);
+    });
+    let contenedor = document.querySelector('.cards-container');
+    contenedor.innerHTML = ''; //eliminamos las tarjetas del DOM
+
+  // Afegir 'tarjetasOrdenadas' al contenidor de cards
+    tarjetasOrdenadas.forEach(tarjeta => {
+        contenedor.appendChild(tarjeta);
+    });
 }
 
 function crearNuevaTarjeta(event) {
