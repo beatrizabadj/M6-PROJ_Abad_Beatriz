@@ -196,7 +196,7 @@ footer {
 
 /* Botones de filtro */
 .filter-btn,
-.sort-az, .sort-za {
+.sort-az, .sort-za{
     display: block;
     width: 100%;
     padding: 10px 15px;
@@ -211,7 +211,7 @@ footer {
 }
 
 .filter-btn:hover,
-.sort-az:hover, .sort-za:hover {
+.sort-az:hover, .sort-za:hover{
     background-color: #5778a4;
     transform: translateY(-2px);
 }
@@ -309,5 +309,25 @@ footer {
 
 .load-btn:hover {
     background-color: blue;
+    transform: translateY(-2px);
+}
+
+
+/* Botón para eliminar tarjetas */
+.delete-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    background-color: red;
+    color: #2e3a4f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1em;
+}
+
+.delete-btn:hover {
+    background-color: red;
     transform: translateY(-2px);
 }
