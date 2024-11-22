@@ -20,6 +20,9 @@ window.onload = () => {
     
     let botonEliminarTarjetas = document.querySelector('.delete-btn');
     botonEliminarTarjetas.addEventListener('click', eliminarTodasTarjetas);
+
+    let botonMezclarTarjetas = document.querySelector('.mix-btn');
+    botonMezclarTarjetas.addEventListener('click', mezclarTarjetas);
 }
 
 function crearTarjetas(filosofos) {
@@ -66,12 +69,21 @@ function crearTarjetas(filosofos) {
         // Añadimos info de la corriente a filaInfo
         let corrienteInfo = document.createElement('div');
         corrienteInfo.classList.add('info-corriente');
-        corrienteInfo.innerHTML = `Corriente: ${filosofo.corriente}`;
+        corrienteInfo.innerHTML = `Corriente: `;
+        
+        let corrienteNombre = document.createElement('span');
+        corrienteNombre.classList.add('corriente');
+        corrienteNombre.innerHTML = `${filosofo.corriente}`;    
+        corrienteInfo.append(corrienteNombre);
         filaInfo.append(corrienteInfo);
         // Añadimos info del arma a filaInfo
         let armaInfo = document.createElement('div');
         armaInfo.classList.add('info-arma');
-        armaInfo.innerHTML = `Arma: ${filosofo.arma}`;
+        armaInfo.innerHTML = 'Arma: ';
+        let armaNombre = document.createElement('span');
+        armaNombre.classList.add('arma');
+        armaNombre.innerHTML = `${filosofo.arma}`;
+        armaInfo.append(armaNombre);
         filaInfo.append(armaInfo);
 
         // Añadimos caja de habilidades
@@ -201,8 +213,8 @@ function parsearTarjetas(tarjetas){
         // Completar funció
         filosofo.pais.nombre = tarjeta.querySelector('.pais').innerHTML;
         filosofo.pais.bandera = tarjeta.querySelector('.info-pais img').src;
-        filosofo.corriente = tarjeta.querySelector('.info-corriente').innerHTML;
-        filosofo.arma = tarjeta.querySelector('.info-arma').innerHTML;
+        filosofo.corriente = tarjeta.querySelector('.corriente').innerHTML;
+        filosofo.arma = tarjeta.querySelector('.arma').innerHTML;
         
         filosofo.habilidades = [];
         
@@ -240,6 +252,19 @@ function eliminarTodasTarjetas(){
         tarjeta.remove();
     });
 }
+
+
+//funcion que mezcla todas las tarjetas
+function mezclarTarjetas(){
+    let tarjetas = Array.from(document.querySelectorAll('.card')); //Convertimos el NodeList en un array para poder usar sort
+    let tarjetasMezcladas = tarjetas.sort(() => 0.5 - Math.random()); //la funcion de comparacion genera valores positivos y negativos equilibradamente
+    let contenedor=document.querySelector('.cards-container');
+    contenedor.innerHTML = '';
+    tarjetasMezcladas.forEach(tarjeta => contenedor.appendChild(tarjeta));
+}
+
+
+
 
 const filosofos = [
     {
