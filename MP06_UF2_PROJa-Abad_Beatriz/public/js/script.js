@@ -137,13 +137,12 @@ document.addEventListener("DOMContentLoaded", async()=>{
     
         // Buscar imágenes en SerpAPI
         async function fetchSerpApi(query) {
-            const apiKey = "f8910fee8f3babe4f359b438e2e02f9b9762b4c34acae3ddec0f3463bb692970"; // Reemplázala con tu clave de SerpAPI
+            //const apiKey = "f8910fee8f3babe4f359b438e2e02f9b9762b4c34acae3ddec0f3463bb692970";
             // const serpApiUrl = `https://serpapi.com/search.json?q=${encodeURIComponent(query)}&tbm=isch&api_key=${apiKey}`;
            
             try {
                 const response = await fetch(`http://localhost:3000/serpapi?q=${encodeURIComponent(query)}`, {
                     method: 'GET',
-                    credentials: 'include' // Solo si el backend usa cookies/sesiones
                 });
                 const data = await response.json();
     
