@@ -141,7 +141,11 @@ document.addEventListener("DOMContentLoaded", async()=>{
             // const serpApiUrl = `https://serpapi.com/search.json?q=${encodeURIComponent(query)}&tbm=isch&api_key=${apiKey}`;
            
             try {
-                const response = await fetch(`http://localhost:3000/serpapi?q=${encodeURIComponent(query)}`, {
+                const apiUrl = window.location.hostname === "localhost"
+                    ? `http://localhost:3000/serpapi?q=${encodeURIComponent(query)}` //port 3000 en local
+                    : `https://m6-proj-abad-beatriz.onrender.com/serpapi?q=${encodeURIComponent(query)}`;
+        
+                const response = await fetch(apiUrl, {
                     method: 'GET',
                 });
                 const data = await response.json();
