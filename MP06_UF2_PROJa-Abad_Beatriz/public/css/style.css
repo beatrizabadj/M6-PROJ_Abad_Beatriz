@@ -103,3 +103,13 @@ input[type="submit"]:hover {
     font-family: "Arial", sans-serif;
     font-weight: bold;
 }
+
+/* Añadir animaciones CSS */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.image-card {
+    animation: fadeIn 0.5s ease-in-out;
+}
