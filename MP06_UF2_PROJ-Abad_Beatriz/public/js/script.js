@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <p style="font-size: 16px; line-height: 1.6; text-decoration:underline;">APIs REST utilizadas:</p>
             <ul style="list-style-type: none; padding: 0; margin: 20px 0;">
                 <li style="margin-bottom: 10px;"><strong>Wikimedia Commons</strong>: Búsqueda de imágenes.</li>
-                <li style="margin-bottom: 10px;"><strong>Serpapi</strong>: Núsqueda de imágenes por población. (Nos hemos quedado sin solicitudes)</li>
+                <li style="margin-bottom: 10px;"><strong>Serpapi</strong>: Búsqueda de imágenes por población. (Nos hemos quedado sin solicitudes)</li>
                 <li style="margin-bottom: 10px;"><strong>Unsplash</strong>: Búsqueda de imágenes.</li>
             </ul>
             <p style="font-size: 16px; line-height: 1.6;text-decoration:underline;">APIs de navegador implementadas:</p>
@@ -325,8 +325,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <li style="margin-bottom: 10px;"><strong>Web Share API</strong>: Comparte las imágenes desde el navegador!</li>
                 <li style="margin-bottom: 10px;"><strong>Fullscreen API</strong>: Mira las imágenes en pantalla completa.</li>
             </ul>
+            <p style="font-size: 16px; line-height: 1.6; text-decoration:underline;">Explicación visual usando:</p>
+            <ul style="list-style-type: none; padding: 0; margin: 20px 0;">
+                <li style="margin-bottom: 10px;"><strong>Este modal</strong></li>
+                <li style="margin-bottom: 10px;"><strong>Tooltips</strong></li>
+            </ul>
             <button id="closeModal" style="padding: 10px 20px; background-color: #ff6f61; color: #FFF; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Cerrar</button>
-        `;
+            `;
         document.body.appendChild(modal);
 
         //tooltips 
