@@ -20,19 +20,23 @@
 // oL’usuari seleccionat.
 // oEl tema seleccionat (clar/fosc).
 // oControlar el valor dels <input> per a la creació de nous usuaris i de noves tasques.
-const { useState } = React;
+
+const { useState, useContext, useEffect, createContext } = React;
+const { createRoot } = ReactDOM;
 
 const app = document.querySelector('.app');
 const root = ReactDOM.createRoot(app);
 root.render(<App />);
 
-
 // crear contexto para el tema
-const themeContext = React.createContext();
+const ThemeContext = React.createContext();
 
 // componente principal App
 function App() {
     const [theme, setTheme] = React.useState('light');
+    const [users, setUsers] = React.useState([]);
+    const [selectedUser, setSelectedUser] = React.useState('');
+
     const toggleTheme=()=>{
         setTheme((p)=>(p === 'light' ? 'dark' : 'light'));
     }
@@ -40,22 +44,30 @@ function App() {
         document.body.className = theme;
     }, [theme])
     return (
-        <themeContext.Provider value={{theme, toggleTheme}}>
-            <UserPanel/>
-            {/* <TaskPanel/> */}
-        </themeContext.Provider>
-    )
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+            <div className="app">
+                <UserPanel
+                    users={users}
+                    setUsers={setUsers}
+                    selectedUser={selectedUser}
+                    setSelectedUser={setSelectedUser}
+                />
+                <TaskPanel
+                    users={users}
+                    setUsers={setUsers}
+                    selectedUser={selectedUser}
+                />
+            </div>
+        </ThemeContext.Provider>
+    );
 }
 // componente Task Panel
-function UserPanel() {
+function UserPanel({ users, setUsers, selectedUser, setSelectedUser }) {
 
-    const [users, setUsers] = React.useState([]);
     const [newUser, setNewUser] = React.useState('');
-    const [selectedUser, setSelectUser] = React.useState('');
+    const { toggleTheme } = useContext(ThemeContext);
     const [index, setIndex] = React.useState(0);
-    const {theme, toggleTheme} = React.useContext(themeContext);
     const [tasks, setTasks] = React.useState([]);
-    const [newTask, setNewTask] = React.useState('');
     const [isVisible, setIsVisible] = React.useState(false);
 
     function addUser() {
@@ -74,20 +86,74 @@ function UserPanel() {
             ...users, 
             userObj
         ])
+
         setNewUser('');
         setIndex(p=>p+1);
     }
 
     function handleSelectUser(user) {
-        setSelectUser(user);
+        setSelectedUser(user);
         setTasks(user.tasks); // mostrar tareas al seleccionar user
     
     }
     function deselectUser() {
-        setSelectUser('');
+        setSelectedUser('');
         setTasks([]); // limpiar tareas
 
     }
+
+    function toggleVisibility() {
+        setIsVisible(p=>!p);
+    }
+
+    return (
+
+        <aside className="sidebar card">
+            <h2>Usuarios</h2>
+            <ul id = "userList" >
+                {(
+                    users.map(user=>(
+                        <li key={user.id} onClick={() =>handleSelectUser(user)} style= {{cursor: 'pointer',fontWeight: 'bold'}}>
+                            {user.name}
+                        </li>
+                    ))
+                )}
+            </ul>
+            
+            <input
+                type="text"
+                id="newUserInput"
+                placeholder = "Nuevo usuario..."
+
+                value={newUser}
+                onChange={(e) =>setNewUser(e.target.value)}
+            />
+            <button onClick={addUser}>Añadir usuario</button>
+            <div id="userInfo" className={selectedUser ? "" : "hidden"}>
+                <hr />
+                <p id="userName">{selectedUser.name}</p>
+                <p id="userStats">Tareas: {users.find(p=>p.id === selectedUser.id) ?.tasks.filter(task =>task.completed).length} / {users.find(p=>p.id === selectedUser.id) ?.tasks.length} completadas</p>
+                {/* llamar a dos funciones via una funcion anonima */}
+                <button onClick={() => {deselectUser();toggleVisibility();}}>Deseleccionar</button>
+            </div>
+            
+            <button onClick={toggleTheme} style={{ marginTop:'auto' }}>🌙/☀️ Tema</button>
+        </aside>
+    );
+}
+
+function TaskPanel({users, setUsers, selectedUser}) {
+    
+    const [tasks, setTasks] = useState([]);
+    const [newTask, setNewTask] = useState('');
+
+    // sincronizar las tareas a cada usuario
+    useEffect(()=> {
+        if (selectedUser) {
+            const user = users.find(p=>p.id === selectedUser.id);
+            setTasks(user ? user.tasks : ([]));
+        }
+    }, [selectedUser, users]);
 
     function addTask() {
         if (newTask === '') {
@@ -119,13 +185,23 @@ function UserPanel() {
 
     // marcar tarea como completada o no en funcion del estado anterior
     function toggleTask(taskId) {
-        setTasks(tasks.map((task) => 
-            task.id === taskId ? {
-                ...task,
-                completed:!task.completed}
+        const updatedTasks = tasks.map((task) =>
+        task.id === taskId ? {
+            ...task,
+            completed:!task.completed
+        }
             : task
         )
-    )}
+        setTasks(updatedTasks);
+
+        // actualizar usuario con la tarea actualizada
+        setUsers(users.map(user => 
+            user.id === selectedUser.id ? {
+                ...user,
+                tasks:updatedTasks 
+            } : user
+        ));
+    }
 
     // nueva lista sin la tarea
     function deleteTask(taskId) {
@@ -146,44 +222,8 @@ function UserPanel() {
                 } : task ))
         }
     }
-    function toggleVisibility() {
-        setIsVisible(p=>!p);
-    }
-
-    return (
-        <div className="app">
-        <aside className="sidebar card">
-            <h2>Usuarios</h2>
-            <ul id = "userList" >
-                {(
-                    users.map(user=>(
-                        <li key={user.id} onClick={() =>handleSelectUser(user)} style= {{cursor: 'pointer',fontWeight: 'bold'}}>
-                            {user.name}
-                        </li>
-                    ))
-                )}
-            </ul>
-            
-            <input
-                type="text"
-                id="newUserInput"
-                placeholder = "Nuevo usuario..."
-
-                value={newUser}
-                onChange={(e) =>setNewUser(e.target.value)}
-            />
-            <button onClick={addUser}>Añadir usuario</button>
-            <div id="userInfo" className={selectedUser ? "" : "hidden"}>
-                <hr />
-                <p id="userName">{selectedUser.name}</p>
-                <p id="userStats">Tareas: {tasks.filter(task =>task.completed).length} / {tasks.length} completadas</p>
-                {/* llamar a dos funciones via una funcion anonima */}
-                <button onClick={() => {deselectUser();toggleVisibility();}}>Deseleccionar</button>
-            </div>
-            
-            <button onClick={toggleTheme} style={{ marginTop:'auto' }}>🌙/☀️ Tema</button>
-        </aside>
-        <main className="main">
+        return (
+            <main className="main">
             <div className="card">
                 <h1 id="mainTitle">{selectedUser ? `Tareas de ${selectedUser.name}` : "Selecciona un usuario"}</h1>
                 <div id="taskSection" className={selectedUser ? "" : "hidden"}>
@@ -192,7 +232,7 @@ function UserPanel() {
                         {(
                             tasks.map(task=>(
                                 <li key={task.id} className={task.completed ? "completed" : ""}>
-                                    <span   onClick={()=>toggleTask(task.id)}>{task.name}</span>
+                                    <span onClick={()=>toggleTask(task.id)}>{task.name}</span>
                                     <div className="actions">
                                         <button onClick={()=>deleteTask(task.id)}>
                                             Borrar
@@ -215,8 +255,5 @@ function UserPanel() {
                 </div>
             </div>
         </main>
-        </div>
-        
-    );
-}
-
+        )
+    }
