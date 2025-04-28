@@ -134,12 +134,16 @@ function UserPanel() {
     }
     
     function editTask(taskId) {
-        alert(`Editar tarea:`)
-        setTasks(tasks.map((task) =>
-        task.id === taskId ? {
-            ...task,
-            name: newTask
-        } : task ))
+        const newName = prompt(`Editar tarea:`);
+        const taskToEdit = tasks.find(task=>task.id === taskId);
+
+        if(newName !== null && newName.trim() != '' && newName !== taskToEdit.name) {
+            setTasks(tasks.map((task) =>
+                task.id === taskId ? {
+                    ...task,
+                    name: newName
+                } : task ))
+        }
     }
     function toggleVisibility() {
         setIsVisible(p=>!p);
@@ -157,16 +161,11 @@ function UserPanel() {
         <aside className="sidebar card">
             <h2>Usuarios</h2>
             
-            <ul id = "userList">
+            <ul id = "userList" >
                 {(
                         users.map(user=>(
-                            <li key={user.id}>
-                                <p id="userName" onClick={() =>handleSelectUser(user)}>{user.name}</p>
-                                {selectedUser?.id === user.id && (
-                            <button onClick={() =>deselectUser()}>
-                                Deseleccionar
-                            </button>
-                        )}
+                            <li key={user.id} onClick={() =>handleSelectUser(user)}>
+                                <p id="userName" >{user.name}</p>
                                 
                             </li>
                             ))
