@@ -35,8 +35,10 @@ function App() {
     const [theme, setTheme] = React.useState('light');
     const toggleTheme=()=>{
         setTheme((p)=>(p === 'light' ? 'dark' : 'light'));
-    
     }
+    React.useEffect(()=>{
+        document.body.className = theme;
+    }, [theme])
     return (
         <themeContext.Provider value={{theme, toggleTheme}}>
             <UserPanel/>
@@ -46,14 +48,13 @@ function App() {
 }
 // componente Task Panel
 function UserPanel() {
-    // lista users
+
     const [users, setUsers] = React.useState([]);
     const [newUser, setNewUser] = React.useState('');
     const [selectedUser, setSelectUser] = React.useState('');
     const [index, setIndex] = React.useState(0);
     const {theme, toggleTheme} = React.useContext(themeContext);
     const [tasks, setTasks] = React.useState([]);
-    const [selectedTask, setSelectTask] = React.useState('');
     const [newTask, setNewTask] = React.useState('');
     const [isVisible, setIsVisible] = React.useState(false);
 
@@ -148,32 +149,24 @@ function UserPanel() {
     function toggleVisibility() {
         setIsVisible(p=>!p);
     }
-    function handleSelectTask(task) {
-        setSelectTask(task);
-    
-    }
-    function deselectTask() {
-        setSelectTask('');
 
-    }
     return (
-        <div className="app">
+        // <body className>
+
+        // </body>
+        <div className={`app ${theme}`}>  {/*la clase cambia segun el theme*/}
         <aside className="sidebar card">
             <h2>Usuarios</h2>
-            
             <ul id = "userList" >
                 {(
-                        users.map(user=>(
-                            <li key={user.id} onClick={() =>handleSelectUser(user)}>
-                                <p id="userName" >{user.name}</p>
-                                
-                            </li>
-                            ))
-                        )}
-    
+                    users.map(user=>(
+                        <li key={user.id} onClick={() =>handleSelectUser(user)} style= {{cursor: 'pointer',fontWeight: 'bold'}}>
+                            {user.name}
+                        </li>
+                    ))
+                )}
             </ul>
             
-
             <input
                 type="text"
                 id="newUserInput"
@@ -199,19 +192,19 @@ function UserPanel() {
                 <div id="taskSection" className={selectedUser ? "" : "hidden"}>
                     
                     <ul id="taskList">
-                    {(
-                        tasks.map(task=>(
-                            <li  key={task.id}>
-                                <span className={task.completed ? "completed" : ""}  onClick={()=>toggleTask(task.id)}>{task.name}</span>
-                                <div className="actions">
-                                <button onClick={()=>deleteTask(task.id)}>
-                                        Borrar
-                                    </button>
-                                    <button onClick={()=>editTask(task.id)}>
-                                        Editar
-                                    </button>
-                                </div>                                
-                            </li>
+                        {(
+                            tasks.map(task=>(
+                                <li key={task.id}>
+                                    <span className={task.completed ? "completed" : ""}  onClick={()=>toggleTask(task.id)}>{task.name}</span>
+                                    <div className="actions">
+                                        <button onClick={()=>deleteTask(task.id)}>
+                                            Borrar
+                                        </button>
+                                        <button onClick={()=>editTask(task.id)}>
+                                            Editar
+                                        </button>
+                                    </div>                                
+                                </li>
                             ))
                         )}
                     </ul>
