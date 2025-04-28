@@ -151,10 +151,7 @@ function UserPanel() {
     }
 
     return (
-        // <body className>
-
-        // </body>
-        <div className={`app ${theme}`}>  {/*la clase cambia segun el theme*/}
+        <div className="app">
         <aside className="sidebar card">
             <h2>Usuarios</h2>
             <ul id = "userList" >
@@ -179,7 +176,7 @@ function UserPanel() {
             <div id="userInfo" className={selectedUser ? "" : "hidden"}>
                 <hr />
                 <p id="userName">{selectedUser.name}</p>
-                <p id="userStats">Tareas: {tasks.length} / {tasks.filter(task =>task.completed).length} completadas</p>
+                <p id="userStats">Tareas: {tasks.filter(task =>task.completed).length} / {tasks.length} completadas</p>
                 {/* llamar a dos funciones via una funcion anonima */}
                 <button onClick={() => {deselectUser();toggleVisibility();}}>Deseleccionar</button>
             </div>
@@ -194,8 +191,8 @@ function UserPanel() {
                     <ul id="taskList">
                         {(
                             tasks.map(task=>(
-                                <li key={task.id}>
-                                    <span className={task.completed ? "completed" : ""}  onClick={()=>toggleTask(task.id)}>{task.name}</span>
+                                <li key={task.id} className={task.completed ? "completed" : ""}>
+                                    <span   onClick={()=>toggleTask(task.id)}>{task.name}</span>
                                     <div className="actions">
                                         <button onClick={()=>deleteTask(task.id)}>
                                             Borrar
@@ -219,6 +216,7 @@ function UserPanel() {
             </div>
         </main>
         </div>
+        
     );
 }
 
