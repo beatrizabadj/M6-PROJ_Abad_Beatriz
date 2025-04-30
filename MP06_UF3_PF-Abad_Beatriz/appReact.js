@@ -45,7 +45,6 @@ function App() {
     }, [theme])
     return (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
-            <div className="app">
                 <UserPanel
                     users={users}
                     setUsers={setUsers}
@@ -57,7 +56,6 @@ function App() {
                     setUsers={setUsers}
                     selectedUser={selectedUser}
                 />
-            </div>
         </ThemeContext.Provider>
     );
 }
@@ -234,11 +232,11 @@ function TaskPanel({users, setUsers, selectedUser}) {
                                 <li key={task.id} className={task.completed ? "completed" : ""}>
                                     <span onClick={()=>toggleTask(task.id)}>{task.name}</span>
                                     <div className="actions">
-                                        <button onClick={()=>deleteTask(task.id)}>
-                                            Borrar
-                                        </button>
                                         <button onClick={()=>editTask(task.id)}>
-                                            Editar
+                                        ✏️
+                                        </button>
+                                        <button onClick={()=>deleteTask(task.id)}>
+                                        🗑️
                                         </button>
                                     </div>                                
                                 </li>
